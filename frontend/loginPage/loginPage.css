@@ -1,0 +1,214 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    background: #0a0a1e; /* linear-gradient(180deg, #2834b1, #2727cf); */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.card {
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 0 16px 4px #97d2ef;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: calc(100% - 400px);
+    left:  -80px;
+    z-index: -1;
+    background: linear-gradient(45deg, #f3f3f7, #c7c7e4);
+    border-radius: 50%;
+    width: 500px;
+    height: 500px;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: 16px;
+    z-index: -1;
+    background: linear-gradient(45deg, #f3f3f7, #c7c7e4);
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+}
+
+.card .container-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    background: linear-gradient(90deg, #5accf1, #525ff0 );
+    padding-left: 2rem;
+    padding-right: 3rem;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.card .container-label span {
+    background-color: #ffffff;
+    margin-top: 2px;
+    height: 3px;
+    width: 100%;
+}
+
+.card .container-icon {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 0;
+}
+
+.card .container-icon .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: linear-gradient(90deg, #525ff0, #5accf1 );
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+
+.card .container-icon .circle i {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.card .container-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #23232e;
+    background: #e0e0e0;
+    padding: 5rem;
+    width: 450px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.card .container-form label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.card .container-form input {
+    color: rgb(19, 6, 201);
+    background-color: transparent;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #2200ff;
+    width: 100%;
+}
+ /* Tentei mudar a cor da bord de acordo com a validação mas deu errado */
+
+/* .card .container-form #email.error {
+    border-bottom: 1px solid #ff0000;
+}
+
+.card .container-form #password.error {
+    border-bottom: 1px solid #ff0000;
+} */
+
+.card .container-form input:focus {
+    border-color: #5151cd;
+    outline: 0;
+
+}
+
+.card .container-form input::placeholder {
+    color: rgb(31, 31, 55)
+}
+
+.card .container-form #email {
+    margin-bottom: 1.75rem;
+}
+
+.card .container-form .change-password {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #23232e;
+    margin-top: 0.75rem;
+}
+
+.card .container-form .change-password a {
+    color:#23232e;
+}
+
+.card .container-form button {
+    color:#ffffff;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #6adcf1, #3246b7);
+    padding: 12px 16px;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .card {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .card::before {
+        display: none;
+    }
+
+    .card::after {
+        display: none;
+    }
+
+    .card .container-label {
+        padding: 3rem 2rem;
+        border-top-right-radius: 8px;
+        border-bottom-left-radius: 0;
+    }
+
+    .card .container-icon {
+        display: none;
+    }
+
+    .card .container-form form {
+        padding: 3rem 2rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-left-radius: 8px;
+        width: auto;
+    }
+}
+/* Incrível resultado final!!! */
+
+/* dicas de ouro: use rem & em inves de px; 
+organize tudo em divs para facilitar a organização dos displays(flex ou grid); 
+adote => outline: 0; & background: transparent; 
+use mais o padding em seus projetos; 
+use mais o box-shadow para efeitos de sombreamento*/

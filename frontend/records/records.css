@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    width: 100vw;
+
+    background: #e5e5fe;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 100%;
+    padding: 12px;
+}
+
+.container .records .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+table thead {
+    background: #0484A1;
+    color: #f8f8ff;
+    border-radius: 6px;
+}
+
+table thead tr th{
+    padding: 12px;
+    border-radius: 6px;
+}
+
+table tbody tr td{
+    padding: 12px;
+    border: 2px solid rgb(33, 33, 122);
+    border-radius: 6px;
+}
+
+#print {
+    padding: 12px;
+
+    border-radius: 6px;
+
+    background: #04a1a1;
+    color: #f8f8ff;
+    border-color: #f8f8ff;
+
+    font-family: 'Poppins', sans-serif;
+
+    cursor: pointer;
+    outline: none;
+}
+
+#print.hidden {
+    display: hidden;
+}
+
+.container .records .content .head{
+    display: hidden;
+}
+
+.container .records .content .head {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.container .records .content #dash-select {
+    font-family: 'Poppins', sans-serif;
+
+    width: 30%;
+    left: 0;
+
+    border-radius: 6px;
+    border: none;
+
+    background: #23232e;
+    color: #f8f8ff;
+    
+    padding: .8rem;
+    cursor: pointer;
+}
+
+.container .records .content #filter {
+    font-family: 'Poppins', sans-serif;
+
+    border-radius: 6px;
+
+    padding: .8rem;
+
+    cursor: pointer;
+
+    border: none;
+    outline: none;
+
+    transition: .3s ease;
+}
+
+.container .records .content #filter:hover {
+    background: rgb(217, 248, 249);
+}
+
+#print-div.opac,
+.head .fill.opac {
+    opacity: 0;
+}
+
+dialog {
+    width: 40%;
+
+    background: #e2e2f8;
+    color: #13141c;
+
+    padding: 32px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    box-shadow:  0 0 1 rgb(0 0 0 /.3);
+
+    transform: translateX(75%) translateY(60%);
+}
+
+dialog::backdrop {
+    background: rgb(0 0 0 /.5);
+}
+
+dialog .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+dialog .modal hr {
+    width: 80%;
+}
+
+dialog .modal div {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 12px;
+}
+
+dialog .modal div button {
+    padding: 12px;
+
+    border: none;
+    outline: none;
+
+    color: #f8f8ff;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+dialog .modal div #cancel {
+background: #af0606;
+}
+
+dialog .modal div #apply {
+    background: #4ad136;
+}
+
+dialog .modal ul li {
+    list-style: none;
+}
+
+
+
+dialog .modal ul li input {
+    width: 40px;
+
+    border-radius: 4px;
+
+    background: #13141c;
+}

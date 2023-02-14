@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  name String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  sensor Sensor[] @relation("users")
+
+  @@map("users")
+}
+
+model Sensor {
+  sensor_id String     @id @default(uuid())
+  name      String
+  content   String?
+  owner     User    @relation("users",fields: [ownerId], references: [id])
+  ownerId  String
+
+  @@map("sensors")
+}

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+header {
+    height: 100px;
+    width: 100%;
+
+    background: #010120;
+    color: #f8f8ff;
+}
+
+header .navigation {
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    flex-direction: row;
+
+    padding: 10px;
+}
+
+header .navigation ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 16px;
+    padding: 16px;
+
+    list-style: none;
+
+}
+
+header .navigation #nav {
+    width: 500px;
+    transform: translateX(-74px);
+}
+
+header .navigation ul #logomark {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+header .navigation ul button {
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #01014c;
+    color: #f8f8ff;
+
+    border: none;
+
+    transition: .4s ease;
+}
+
+header .navigation ul button:hover {
+    transform: scale(1.2);
+    background: #020278;
+}
+
+header .navigation ul li a {
+    text-decoration: none;
+    color: #f8f8ff;
+
+    font-weight: 700;
+}
+
+main {
+ width: 100%;
+ height: 1000px;
+ 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+ flex-direction: column;
+
+ color: #0a0a1e;
+
+ background: url(../images/Logo\ SENAI.jpg);
+ background-size: cover;
+}
+
+main .head {
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .content {
+    width: 100%;
+    height: 900px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    transform: translateY(30px);
+}
+
+main .content .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+    height: 330px;
+    width: 330px;
+
+    border-radius: 8px;
+
+    background: #0a0a1ed6;
+    color: #f8f8ff;
+}
+
+main .content .card hr {
+    width: 80%;
+}
+
+main .content .card p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .help {
+    width: 66%;
+
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    padding: 20px;
+
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    background: #010120d6;
+    color: #f8f8ff;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 70px;
+
+    background: #0a0a1e;
+    color: #f8f8ff;
+}

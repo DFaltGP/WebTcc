@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #e5e5e8; /*1b1b1d*/
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.container .contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 8rem;
+    background: #f8f8ff;
+    height: 60vh;
+    padding: 2rem;
+    border-radius: 24px;
+}
+
+.container .contact-card .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+
+}
+
+.container .contact-card .image div a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 10rem;
+    height: 10rem;
+    text-decoration: none;
+    color: #000;
+}
+
+.container .contact-card .image div img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 24px;
+}
