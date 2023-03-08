@@ -1,39 +1,64 @@
-class WaterFlowGraphic {
-    constructor(ctx, config) {
-       const newGraphic = new Chart(this.ctx, this.config)
+const sensorUrl = 'http://localhost:3333/sensors/allSensors';
+const userUrl = 'http://localhost:3333/users/allUsers' ;
+
+    const getSensorData = async() => {
+        
+        try {
+            
+            const response = await fetch(sensorUrl)
+            const dados = response.json()
+            return dados
+
+        } catch (error) {
+            
+            console.error(error)
+
+        }
+
     }
 
-    get graphic() {
-        return this.#createNewGrapich()
-    }
+    const getUserData = async() => {
+        
+        try {
+            
+            const response = await fetch(userUrl)
+            const dados = response.json()
+            return dados
 
-    #createNewGrapich() {
-     console.log("Deu certo")//código da criação de gráficos
+        } catch (error) {
+            
+            console.error(error)
+
+        }
+
     }
-}
+// ABA DOS GRÁFICOS
 
 const ctx = document.querySelector("#myChart").getContext("2d")
 
-const gradient = ctx.createLinearGradient(100, 0, 0, 400)
-gradient.addColorStop(0, '#086ca7')
-gradient.addColorStop(1, '#04827f')
+const gradient1 = ctx.createLinearGradient(100, 0, 0, 400)
+gradient1.addColorStop(0, '#086ca7')
+gradient1.addColorStop(1, '#0f8f7f')
 
-const labels = [
-    '2017',
-    '2018',
-    '2019',
-    '2020',
-    '2021',
-    '2022',
-]
+const gradient2 = ctx.createLinearGradient(100, 0, 0, 400)
+gradient2.addColorStop(0, '#e6fa0a')
+gradient2.addColorStop(1, '#fa520a')
+
+const labels = [];
 
 const data = {
     labels,
     datasets: [{
-        data: [315, 365, 348, 320, 248, 280, 260, 270, 231],
-        label: "Consumo de água anual", //data pode ser puxado do banco de dados via http a axios
+        data: [], 
+        label: "Consumo diário", 
         fill: true,
-        backgroundColor: gradient,
+        backgroundColor: gradient1,
+    },
+    {
+        data: [], 
+        label: "Desperdício diário", 
+        fill: true,
+        backgroundColor: gradient2,
     }]
 };
 
@@ -63,7 +88,7 @@ const config = {
                 ticks: {
                     callback: function(value) {
                         let finalValue = value.toFixed(2)
-                        return finalValue + " Mil Litros"
+                        return finalValue + " L/min"
                     }
                 }
             }
@@ -76,13 +101,113 @@ const config = {
 }, 
 }
 
+// ABA DE MANIPULAÇÃO DO GRÁFICO PELO USUÁRIO
+// const loadSensorData = async () => {
 
-
+    //     const sensors = await getData();
     
+    //     sensors.forEach(sensor => {
+    //         data.datasets[0].data.push(sensor.content.split(" ")[0].replace("L", ""))
+    //         data.datasets[1].data.push((sensor.content.split(" ")[0].replace("L", ""))*0.6)
+    //     })
+    
+    //     myChart.update()
+    
+    // }
+    
+    // const loadSensorLabel = async () => {
+    
+    //     const sensors = await getData();
+    
+    //     sensors.forEach(sensor => {
+    //         labels.push(sensor.name)
+    //     })
+    
+    //     myChart.update()
+    
+// }
 
-const myChart = new Chart(ctx, config)
+const changeGraphType = () => {
+    if(config.type == 'bar') {
+        config.type = 'line'
+    } else {
+        config.type = 'bar'
+    }
 
-// ABA DOS GRÁFICOS 
+    myChart.update()
+
+}
+
+const switchFillMode = () => {
+    data.datasets.forEach(graph => {
+        if (graph.fill == false) {
+            graph.fill = true
+        } else {
+            graph.fill = false
+        }
+    });
+
+    myChart.update()
+
+}
+
+    const userSelect = document.querySelector('#users-select')
+
+    const createElement = (tag, innerText = '', innerHTML = '') => {
+        const element = document.createElement(tag)
+      
+        if(innerText) {
+          element.innerText = innerText
+        }
+      
+        if(innerHTML) {
+          element.innerHTML = innerHTML
+        }
+      
+          return element;
+      
+      }
+      
+      const createSelect = (user) => {
+        const { id, name, sensor } = user;
+      
+        const optionName = createElement('option', name)
+        
+        userSelect.appendChild(optionName)
+        
+      }
+      
+      const loadUser = async () => {
+      
+        const users = await getUserData();
+      
+          users.forEach(user => {
+           createSelect(user);
+         });
+      
+      } 
+
+      async function refreshGraph(option) {
+        const sensors = await getSensorData();
+        
+        sensors.forEach(sensor => {
+            if(option.value == sensor.owner.name) {
+                data.datasets[0].data.push(sensor.content.split(" ")[0].replace("L", ""))
+                data.datasets[1].data.push(sensor.content.split(" ")[0].replace("L", "")*0.33)
+                labels.push(sensor.name)
+            }
+        })
+    
+        console.log(option.value)
+        myChart.update()
+    }
+      
+    loadUser();
+
+// ABA DA NAV-BAR
+
+const myChart = new Chart(ctx, config);
+ myChart.update();
 
 const body = document.querySelector("body"),
     sidebar = body.querySelector(".sidebar"),
@@ -97,10 +222,15 @@ const body = document.querySelector("body"),
         body.classList.toggle("dark");
 
         if(body.classList.contains("dark")) {
-            modeText.innerText = "Claro"; 
+            modeText.innerText = "Claro"
+            config.options.plugins.customCanvasBackgroundColor.color = "#242526"
         } else {
-            modeText.innerText = "Escuro"        
+            modeText.innerText = "Escuro" 
+            config.options.plugins.customCanvasBackgroundColor.color = "#f8f8ff"
         }
+
+        myChart.update()
+    
     })
 
     toggle.addEventListener('click', () => {
@@ -115,10 +245,25 @@ const body = document.querySelector("body"),
         sidebar.classList.remove('close')
     })
 
-    const recordLink = document.querySelector('#recordPage')
-    recordLink.addEventListener('click', () => {
-        location.href = 'http://127.0.0.1:5500/frontend/records/records.html'
-    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const recordLink = document.querySelector('#recordPage')
+    // recordLink.addEventListener('click', () => {
+    //     location.href = 'http://127.0.0.1:5500/frontend/records/records.html'
+    // })
+
     // searchInput.addEventListener('input',(search) => {
     //     const dataBase = ["data1","data2","data3"...];
     //     const res = [];
@@ -129,6 +274,7 @@ const body = document.querySelector("body"),
     //         }
     //     }
     // })
+
 
 
 

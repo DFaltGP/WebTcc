@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +100,11 @@
     </nav>
     <section class="home">
         <div class="text">
+            <div class="tools">
+                <button onclick="changeGraphType()">ALTERE O TIPO DO GRÁFICO</button>
+                <button onclick="switchFillMode()">TROQUE O MODO DE PREENCHIMENTO</button>
+                <select name="" id="users-select" onchange="refreshGraph(this)"></select>
+            </div>
             <canvas id="myChart"></canvas>
         </div>
     </section>

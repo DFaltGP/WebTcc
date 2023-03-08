@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { json, Request, Response } from "express";
 import { GetUserByCreateDate } from "../getUser";
 
 export class GetUserByCreateDateController {
@@ -8,6 +8,6 @@ export class GetUserByCreateDateController {
 
         const result = await getUserByCreateDate.execute();
 
-        return res.status(200).json(result);
+        return res.status(200).json(result)
     }
 }

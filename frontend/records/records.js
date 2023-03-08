@@ -1,65 +1,84 @@
-const dataBase = [
-    {
-        periodo: "23/11",
-        consumo: "43",
-        time: "180",
-        spends: "400",
-        situation: true,
-    },
-    {
-        periodo: "23/11",
-        consumo: "43",
-        time: "180",
-        spends: "300",
-        situation: true,
-    },
-    {
-        periodo: "23/11",
-        consumo: "43",
-        time: "180",
-        spends: "200",
-        situation: true,
-    },
-    {
-        periodo: "23/11",
-        consumo: "43",
-        time: "180",
-        spends: "500",
-        situation: true,
-    },
-    {
-        periodo: "23/11",
-        consumo: "43",
-        time: "180",
-        spends: "100",
-        situation: true,
+const tbody = document.querySelector(".container #table tbody")
+
+const url = "http://localhost:3333/sensors/allSensors";
+
+const getData = async () => {
+
+    try {
+
+      const response = await fetch(url)
+      const data = await response.json()
+      return data
+    
+    } catch (error) {
+    
+      console.error(error)
+    
     }
-];
 
-    // const records = document.querySelector(".container .records")
-    // function render(dataBase) {
-    //     let list = '';
-    //     if(dataBase.lenght <= 0) {
-    //         list += `<div class="results">Nenhum relatório encontrado</div>`
-    //     } else {
-    //         dataBase.forEach((dataBase, index) => {
-    //             list += `
-    //             <div class="results">
-    //             ${dataBase.periodo}     ${dataBase.consumo}    ${dataBase.time}     ${dataBase.spends}     ${dataBase.situation}
-    //             </div>
-    
-    //             `
-    //         })
-    //     }
+}
 
-    //     records.innerHTML = list;
+const createElement = (tag, innerText = '', innerHTML = '') => {
+  const element = document.createElement(tag)
 
-    // }
+  if(innerText) {
+    element.innerText = innerText
+  }
 
-    // render(dataBase)
+  if(innerHTML) {
+    element.innerHTML = innerHTML
+  }
 
-    
+    return element;
+
+}
+
+const createRow = (sensor) => {
+  const { name, content, ownerId, owner, sensor_id} = sensor;
+
+  const contentSplit = content.split(" ")
+  const consumo = contentSplit[0]
+  const volume = contentSplit[0].replace("L", "") 
+  const gastos = (volume*0.65)
+  const periodo = contentSplit[2]
+  const time = contentSplit[1]
+
+  const tr = createElement('tr')
+  const tdName = createElement('td', name)
+  const tdPeriodo  = createElement('td', periodo)
+  const tdConsumo = createElement('td', consumo)
+  const tdTime = createElement('td', time)
+  const tdVolume = createElement('td', `${volume*1000}dm`)
+  const tdGastos = createElement('td', `R$${gastos.toFixed(2)}`)
+  const tdOperation = createElement('td', 'ATIVO')
+  const tdSituation = createElement('td', "SEM FALHAS")
+
+  tr.appendChild(tdName)
+  tr.appendChild(tdPeriodo)
+  tr.appendChild(tdConsumo)
+  tr.appendChild(tdTime)
+  tr.appendChild(tdVolume)
+  tr.appendChild(tdGastos)
+  tr.appendChild(tdOperation)
+  tr.appendChild(tdSituation)
+  tbody.appendChild(tr)
+
+}
+
+const loadSensor = async () => {
+
+  const sensors = await getData();
+
+  sensors.forEach(sensor => {
+     createRow(sensor);
+  });
+
+} 
+
+loadSensor();
+
 const print = document.querySelector("#print");
+
     print.addEventListener('click', (e) => {
      const head = document.querySelector('.head .fill');
      const printDiv = document.querySelector("#print-div")
@@ -70,16 +89,16 @@ const print = document.querySelector("#print");
             printDiv.classList.remove('opac')
             head.classList.remove('opac')
         }, 10);
-    })
+    });
 
-const filter = document.querySelector('#filter')
-const modal = document.querySelector('dialog')
-const buttonCancel = document.querySelector('#cancel')
+const filter = document.querySelector('#filter');
+const modal = document.querySelector('dialog');
+const buttonCancel = document.querySelector('#cancel');
 
 filter.onclick = function () {
     modal.showModal()
-}
+};
 
 buttonCancel.onclick = function () {
     modal.close()
-}
+};

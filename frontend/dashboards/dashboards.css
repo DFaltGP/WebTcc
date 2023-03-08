@@ -280,21 +280,17 @@ body.dark .switch::before {
 }
 
 .home .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     font-size: 30px;
     font-weight: 500;
-    padding: 8px 40px;
+    padding: 16px 40px;
     color: var(--text-color);
 }
 
 .sidebar.close ~ .home {
     width: calc(100% - 88px);
     left: 88px;    /* PARTE QUE TORNA O DASHBOARD RESPONSIVO À PÁGINA */
-}
-
-.mychart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
 }

@@ -5,7 +5,7 @@ export class GetUserByCreateDate {
     async execute(): Promise<User[]> {
         const users = await prisma.user.findMany({
             orderBy: {
-                created_at: "desc"
+                name: "asc"
             },
             include: {
                 sensor: {
